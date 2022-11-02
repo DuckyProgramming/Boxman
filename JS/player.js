@@ -1,0 +1,25 @@
+class player extends entity{
+    constructor(layer,x,y){
+        super(layer,x,y)
+        this.velocity={x:0,y:0}
+        this.previous={position:{x:0,y:0}}
+        this.width=20
+        this.height=40
+        this.fade=1
+    }
+    display(){
+        this.layer.translate(this.position.x,this.position.y)
+        this.layer.noStroke()
+        this.layer.fill(200,50,50,this.fade)
+        this.layer.rect(0,0,this.width,this.height)
+        this.layer.translate(-this.position.x,-this.position.y)
+    }
+    update(){
+        super.update()
+        this.previous.position.x=this.position.x
+        this.previous.position.y=this.position.y
+        this.position.x+=this.velocity.x
+        this.position.y+=this.velocity.y
+        this.velocity.y+=physics.gravity
+    }
+}
